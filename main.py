@@ -103,7 +103,7 @@ class Item(pygame.sprite.Sprite):  # класс предмета
         self.rect = self.image.get_rect().move(x, y)
         self.damage = dmg
 
-    def update(self):
+    def update(self):  # функция обновления
         self.rect.x = 0
         self.rect.y = 550
         player.damage += self.damage
@@ -128,7 +128,7 @@ class Mob(pygame.sprite.Sprite):  # класс монстра для игры
         self.hp_max = hp
         self.damage = dmg * ENEMY_DMG[0]
 
-    def update(self, dmg):
+    def update(self, dmg):  # функция обновления
         self.hp -= dmg
         if self.hp <= 0:
             self.hp = 0
@@ -144,7 +144,7 @@ class AnimatedSprite(pygame.sprite.Sprite):  # класс для анимаци�
         self.image = self.frames[self.cur_frame]
         self.rect = self.rect.move(x, y)
 
-    def cut_sheet(self, sheet, columns, rows):
+    def cut_sheet(self, sheet, columns, rows):  # функция нарезки изображения
         self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
                                 sheet.get_height() // rows)
         for j in range(rows):
@@ -153,7 +153,7 @@ class AnimatedSprite(pygame.sprite.Sprite):  # класс для анимаци�
                 self.frames.append(sheet.subsurface(pygame.Rect(
                     frame_location, self.rect.size)))
 
-    def update(self):
+    def update(self):  # функция обновления
         self.cur_frame = (self.cur_frame + 1) % len(self.frames)
         self.image = self.frames[self.cur_frame]
 
@@ -168,7 +168,7 @@ class Player(pygame.sprite.Sprite):  # класс игрока
         self.hp_max = hp
         self.damage = dmg
 
-    def change_hp(self, dmg=0, hp=0):
+    def change_hp(self, dmg=0, hp=0):  # изменение здоровья
         self.hp -= dmg
         self.hp += hp
         if self.hp < 0:
@@ -176,7 +176,7 @@ class Player(pygame.sprite.Sprite):  # класс игрока
         if self.hp > self.hp_max:
             self.hp = self.hp_max
 
-    def change_dmg(self, dmg_of_item):
+    def change_dmg(self, dmg_of_item):  # изменение урона
         self.damage += dmg_of_item
 
 
@@ -416,7 +416,7 @@ class Menu:  # класс меню
         self.clas = self.list_of_classes[1]
         self.level = 0
 
-    def load_window(self):
+    def load_window(self):  # загрузка окна
         fon = pygame.transform.scale(load_image('fon.png'), (WIDTH, HEIGHT))
         fon.get_rect()
         screen.blit(fon, (0, 0))
